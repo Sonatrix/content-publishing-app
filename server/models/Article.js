@@ -43,4 +43,3 @@ ArticleSchema.methods.getUserArticle = (_id)=> {
 }
 
 module.exports = mongoose.model('Article', ArticleSchema);
-

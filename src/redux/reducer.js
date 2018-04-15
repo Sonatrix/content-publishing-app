@@ -7,5 +7,5 @@ export default combineReducers({
   articles,
   authUser,
   common,
-  router: routerReducer
+  router: routerReducer,
 });

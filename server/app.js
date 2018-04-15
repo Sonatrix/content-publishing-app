@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cloudinary = require('cloudinary');
 
-//initialise env variables
+// initialise env variables
 require('dotenv').config();
 
 const app = express();
@@ -22,13 +22,22 @@ cloudinary.config({
 });
 
 /** connect to MongoDB datastore */
-try {
-  mongoose.connect(url, {
-    //useMongoClient: true
-  });
-} catch (error) {}
+mongoose
+  .connect(url, {
+    autoIndex: false,
+    poolSize: 10,
+    bufferMaxEntries: 0,
+  })
+  .then(
+    () => {
+      console.log('database connected');
+    },
+    error => {
+      console.log('database connection error', error);
+    }
+  );
 
-let port = 5000 || process.env.PORT;
+const port = 5000 || process.env.PORT;
 
 /** set up routes {API Endpoints} */
 routes(router);
@@ -37,7 +46,7 @@ routes(router);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(helmet());
-//app.use('/static',express.static(path.join(__dirname,'static')))
+// app.use('/static',express.static(path.join(__dirname,'static')))
 
 app.use('/api', router);
 

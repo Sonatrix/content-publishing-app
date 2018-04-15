@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadArticles } from './../redux/actions/actions';
 import AsideFeed from './AsideFeed';
-const mapStateToProps = state => {
-  return {
-    articles: state.articles.articles,
-  };
-};
+
+const mapStateToProps = state => ({
+  articles: state.articles.articles,
+});
 class Feed extends Component {
   componentWillReceiveProps(nextProps) {}
 
@@ -37,7 +36,7 @@ class Feed extends Component {
           </div>
         </div>
         {article.feature_img.length > 0 ? (
-          <div class="post-picture-wrapper">
+          <div className="post-picture-wrapper">
             <img src={article.feature_img} alt="Thumb" />
           </div>
         ) : (

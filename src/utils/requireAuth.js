@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 export default function(AppComponent) {
   class Authenticate extends Component {
     componentWillMount() {
@@ -15,10 +16,8 @@ export default function(AppComponent) {
   Authenticate.contextTypes = {
     router: PropTypes.object.isRequired,
   };
-  const mapStateToProps = state => {
-    return {
-      isAuth: state.authUser.isAuth,
-    };
-  };
+  const mapStateToProps = state => ({
+    isAuth: state.authUser.isAuth,
+  });
   return connect(mapStateToProps)(Authenticate);
 }

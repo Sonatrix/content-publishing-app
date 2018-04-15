@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 class EditorHeader extends Component {
   render() {
     return (

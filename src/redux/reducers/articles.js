@@ -15,12 +15,12 @@ export default (state = initialState, action) => {
         article: action.article,
       };
     case 'CLAP_ARTICLE':
-      let article = Object.assign({}, state.article);
+      const article = Object.assign({}, state.article);
       article.claps++;
       console.log(article);
       return {
         ...state,
-        article: article,
+        article,
       };
     default:
       return state;

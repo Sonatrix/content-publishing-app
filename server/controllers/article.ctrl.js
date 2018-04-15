@@ -1,15 +1,27 @@
 const Article = require('./../models/Article');
-const User = require('./../models/User');
-const fs = require('fs');
 const cloudinary = require('cloudinary');
+
 module.exports = {
   addArticle: (req, res, next) => {
-    let { text, title, claps, description } = req.body;
+    const { text, title, claps, description } = req.body;
+    const saveArticle = obj => {
+      new Article(obj).save((err, article) => {
+        if (err) res.send(err);
+        else if (!article) res.send(400);
+        else {
+          return article
+            .addAuthor(req.body.author_id)
+            .then(_article => res.send(_article));
+        }
+        next();
+      });
+    };
+
     if (req.files.image) {
       cloudinary.uploader.upload(
         req.files.image.path,
         result => {
-          let obj = {
+          const obj = {
             text,
             title,
             claps,
@@ -25,18 +37,6 @@ module.exports = {
       );
     } else {
       saveArticle({ text, title, claps, description, feature_img: '' });
-    }
-    function saveArticle(obj) {
-      new Article(obj).save((err, article) => {
-        if (err) res.send(err);
-        else if (!article) res.send(400);
-        else {
-          return article.addAuthor(req.body.author_id).then(_article => {
-            return res.send(_article);
-          });
-        }
-        next();
-      });
     }
   },
   getAll: (req, res, next) => {
@@ -55,11 +55,7 @@ module.exports = {
    */
   clapArticle: (req, res, next) => {
     Article.findById(req.body.article_id)
-      .then(article => {
-        return article.clap().then(() => {
-          return res.json({ msg: 'Done' });
-        });
-      })
+      .then(article => article.clap().then(() => res.json({ msg: 'Done' })))
       .catch(next);
   },
   /**
@@ -67,16 +63,14 @@ module.exports = {
    */
   commentArticle: (req, res, next) => {
     Article.findById(req.body.article_id)
-      .then(article => {
-        return article
+      .then(article =>
+        article
           .comment({
             author: req.body.author_id,
             text: req.body.comment,
           })
-          .then(() => {
-            return res.json({ msg: 'Done' });
-          });
-      })
+          .then(() => res.json({ msg: 'Done' }))
+      )
       .catch(next);
   },
   /**

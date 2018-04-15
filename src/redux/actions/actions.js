@@ -1,5 +1,5 @@
 import axios from 'axios';
-//const url = "http://localhost:5000/api/"
+// const url = "http://localhost:5000/api/"
 const url =
   process.env.NODE_ENV === 'production'
     ? '/api/'
@@ -9,7 +9,7 @@ export function loadArticles() {
     axios
       .get(`${url}articles`)
       .then(res => {
-        let articles = res.data;
+        const articles = res.data;
         dispatch({ type: 'LOAD_ARTICLES', articles });
       })
       .catch(err => {
@@ -20,9 +20,7 @@ export function loadArticles() {
 export function getUser(_id) {
   return axios
     .get(`${url}user/${_id}`)
-    .then(res => {
-      return res.data;
-    })
+    .then(res => res.data)
     .catch(err => console.log(err));
 }
 export function getUserProfile(_id) {
@@ -30,7 +28,7 @@ export function getUserProfile(_id) {
     axios
       .get(`${url}user/profile/${_id}`)
       .then(res => {
-        let profile = res.data;
+        const profile = res.data;
         dispatch({ type: 'SET_PROFILE', profile });
       })
       .catch(err => console.log(err));
@@ -41,7 +39,7 @@ export function getArticle(article_id) {
     axios
       .get(`${url}article/${article_id}`)
       .then(res => {
-        let article = res.data;
+        const article = res.data;
         dispatch({ type: 'VIEW_ARTICLE', article });
       })
       .catch(err => console.log(err));
@@ -51,7 +49,7 @@ export function getArticle(article_id) {
 export function comment() {
   return dispatch => {};
 }
-//req.body.article_id
+// req.body.article_id
 export function clap(article_id) {
   return dispatch => {
     axios
@@ -62,7 +60,7 @@ export function clap(article_id) {
       .catch(err => console.log(err));
   };
 }
-//id, user_id
+// id, user_id
 export function follow(id, user_id) {
   return dispatch => {
     axios
@@ -78,7 +76,7 @@ export function SignInUser(user_data) {
     axios
       .post(`${url}user`, user_data)
       .then(res => {
-        let user = res.data;
+        const user = res.data;
         localStorage.setItem('Auth', JSON.stringify(user));
         dispatch({ type: 'SET_USER', user });
       })

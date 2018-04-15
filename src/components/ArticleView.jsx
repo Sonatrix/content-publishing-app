@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getArticle, clap, follow } from './../redux/actions/actions';
 import PropTypes from 'prop-types';
+
+import { getArticle, clap, follow } from './../redux/actions/actions';
 import FollowButton from './FollowButton';
-const mapStateToProps = state => {
-  return {
-    _article: state.articles.article,
-    user: state.authUser.user,
-  };
-};
+
+const mapStateToProps = state => ({
+  _article: state.articles.article,
+  user: state.authUser.user,
+});
 class ArticleView extends Component {
-  componentDidMount() {
-    document.body.className = 'posts show';
-  }
   componentWillMount() {
     this.props.getArticle(this.props.match.params.id);
+  }
+  componentDidMount() {
+    document.body.className = 'posts show';
   }
   componentWillUnmount() {
     document.body.className = '';

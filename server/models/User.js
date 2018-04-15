@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
   provider: String,
@@ -20,9 +20,9 @@ let UserSchema = new mongoose.Schema({
     },
   ],
 });
-UserSchema.methods.follow = user_id => {
-  if (this.following.includes(user_id) === -1) {
-    this.following.push(user_id);
+UserSchema.methods.follow = userId => {
+  if (this.following.includes(userId) === -1) {
+    this.following.push(userId);
   }
 };
 

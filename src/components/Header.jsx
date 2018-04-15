@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 class Header extends Component {
   render() {
     return (
@@ -74,17 +75,13 @@ class Header extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.authUser.user,
-    isAuth: state.authUser.isAuth,
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    openSignInWith: () => {
-      dispatch({ type: 'TOGGLE_MODAL', modalMode: true });
-    },
-  };
-};
+const mapStateToProps = state => ({
+  user: state.authUser.user,
+  isAuth: state.authUser.isAuth,
+});
+const mapDispatchToProps = dispatch => ({
+  openSignInWith: () => {
+    dispatch({ type: 'TOGGLE_MODAL', modalMode: true });
+  },
+});
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

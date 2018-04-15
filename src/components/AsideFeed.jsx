@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 class AsideFeed extends Component {
   render() {
     const authors = this.props._articles
-      .map(_article => {
-        return _article.author.name;
-      })
+      .map(_article => _article.author.name)
       .sort()
-      .filter((a, b, self) => {
-        return self.indexOf(a) === b;
-      })
+      .filter((a, b, self) => self.indexOf(a) === b)
       .map(__article => (
         <a href="javascript:void(0);" className="tag">
           {__article}

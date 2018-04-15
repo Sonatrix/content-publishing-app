@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-let ArticleSchema = new mongoose.Schema({
+const ArticleSchema = new mongoose.Schema({
   text: String,
   title: String,
   description: String,
@@ -21,7 +21,7 @@ let ArticleSchema = new mongoose.Schema({
   ],
 });
 ArticleSchema.methods.clap = () => {
-  this.claps++;
+  this.claps += 1;
   return this.save();
 };
 
@@ -30,15 +30,13 @@ ArticleSchema.methods.comment = c => {
   return this.save();
 };
 
-ArticleSchema.methods.addAuthor = author_id => {
-  this.author = author_id;
+ArticleSchema.methods.addAuthor = authorId => {
+  this.author = authorId;
   return this.save();
 };
 
 ArticleSchema.methods.getUserArticle = _id => {
-  Article.find({ author: _id }).then(article => {
-    return article;
-  });
+  Article.find({ author: _id }).then(article => article);
 };
 
 module.exports = mongoose.model('Article', ArticleSchema);

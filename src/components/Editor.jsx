@@ -4,6 +4,7 @@ import MediumEditor from 'medium-editor';
 import axios from 'axios';
 import EditorHeader from './EditorHeader';
 import './../../node_modules/medium-editor/dist/css/medium-editor.min.css';
+
 class Editor extends Component {
   constructor() {
     super();
@@ -50,17 +51,17 @@ class Editor extends Component {
   }
   previewImg() {
     const file = this.refs.fileUploader.files[0];
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.onload = function(e) {
       document.getElementById('image_preview').src = e.target.result;
       this.setState({
-        imgSrc: file /*e.target.result*/,
+        imgSrc: file /* e.target.result */,
       });
     }.bind(this);
     reader.readAsDataURL(file);
   }
   componentDidMount() {
-    const editor = new MediumEditor(/*dom, */ '.medium-editable', {
+    const editor = new MediumEditor(/* dom, */ '.medium-editable', {
       autoLink: true,
       delay: 1000,
       targetBlank: true,
@@ -151,7 +152,7 @@ class Editor extends Component {
                   <small>{this.props.user.email}</small>
                 </div>
               </div>
-              <form className="editor-form main-editor" autocomplete="off">
+              <form className="editor-form main-editor" autoComplete="off">
                 <div
                   className={
                     this.state.imgSrc != null
@@ -181,7 +182,7 @@ class Editor extends Component {
                 <div className="form-group">
                   <textarea id="medium-editable" className="medium-editable" />
                 </div>
-                <div class="hidden">
+                <div className="hidden">
                   <input
                     type="file"
                     onChange={() => this.previewImg()}
@@ -197,9 +198,7 @@ class Editor extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.authUser.user,
-  };
-};
+const mapStateToProps = state => ({
+  user: state.authUser.user,
+});
 export default connect(mapStateToProps)(Editor);

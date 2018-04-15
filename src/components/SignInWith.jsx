@@ -6,10 +6,11 @@ import {
   toggleClose,
   toggleOpen,
 } from './../redux/actions/actions';
+
 class SignInWith extends Component {
   render() {
     const responseGoogle = res => {
-      let postData = {
+      const postData = {
         name: res.w3.ig,
         provider: 'google',
         email: res.w3.U3,
@@ -61,11 +62,9 @@ class SignInWith extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    modalMode: state.common.modalMode,
-  };
-};
+const mapStateToProps = state => ({
+  modalMode: state.common.modalMode,
+});
 export default connect(mapStateToProps, {
   toggleClose,
   toggleOpen,

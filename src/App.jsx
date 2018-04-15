@@ -7,9 +7,10 @@ import ArticleView from './components/ArticleView';
 import Editor from './components/Editor';
 import requireAuthentication from './utils/requireAuth';
 import SignInWith from './components/SignInWith';
+
 export default class App extends Component {
   render() {
-    const pathname = window.location.pathname;
+    const { pathname } = window.location || {};
     return (
       <div>
         {!pathname.includes('editor') ? <Header /> : ''}

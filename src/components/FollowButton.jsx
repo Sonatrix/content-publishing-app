@@ -22,7 +22,7 @@ class FollowButton extends Component {
     }
   }
   render() {
-    let following = this.props.user;
+    const following = this.props.user;
     const f = following.indexOf(this.props.to_follow);
     return (
       <div>
@@ -44,11 +44,9 @@ class FollowButton extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    _user: state.authUser.user,
-  };
-};
+const mapStateToProps = state => ({
+  _user: state.authUser.user,
+});
 export default connect(mapStateToProps, {
   follow,
   toggleOpen,

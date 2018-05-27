@@ -4,7 +4,7 @@ import './assets/index.css';
 import { Provider } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
-import App from './App.js';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { store, history } from './redux/store';
 

@@ -2,12 +2,12 @@ const initialState = {
   products: [],
   product: {},
   loading: false,
-  error: null
+  error: null,
 };
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'LOAD_PRODUCTS':
-    console.log(action.products, "data");
+      console.log(action.products, 'data');
       return {
         ...state,
         products: action.products,

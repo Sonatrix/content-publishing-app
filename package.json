@@ -85,7 +85,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "dev": "nodemon -w server/app.js -d \"npm start\"",
-    "start": "node scripts/start.js",
+    "start": "nodemon scripts/start.js",
     "build": "node scripts/build.js",
     "test": "run-s test:**",
     "test:lint:js": "eslint --ext=js --ext=jsx .",

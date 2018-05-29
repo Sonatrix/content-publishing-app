@@ -32,7 +32,7 @@ class Header extends Component {
             <ul className="nav navbar-nav filter-links">
               <li>
                 <a className="" href="/">
-                  Top stories
+                  Top Products
                 </a>
               </li>
             </ul>

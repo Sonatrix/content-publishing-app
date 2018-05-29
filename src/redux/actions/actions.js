@@ -17,6 +17,20 @@ export function loadArticles() {
       });
   };
 }
+export function loadProducts() {
+  return dispatch => {
+    axios
+      .get(`${url}products`)
+      .then(res => {
+        const products = res.data;
+        console.log(products,"data1");
+        dispatch({ type: 'LOAD_PRODUCTS', products });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+}
 export function getUser(_id) {
   return axios
     .get(`${url}user/${_id}`)

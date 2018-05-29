@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Feed from './components/Feed';
 import Profile from './components/Profile';
+import Products from './components/Products';
 import ArticleView from './components/ArticleView';
 import Editor from './components/Editor';
 import requireAuthentication from './utils/requireAuth';
@@ -17,6 +18,7 @@ export default class App extends Component {
         <SignInWith />
         <Switch>
           <Route exact path="/" component={Feed} />
+          <Route exact path="/products" component={Products} />
           <Route path="/profile/:id" component={Profile} />
           <Route path="/articleview/:id" component={ArticleView} />
           <Route path="/editor" component={requireAuthentication(Editor)} />

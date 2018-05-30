@@ -3,16 +3,11 @@ import { connect } from 'react-redux';
 import { loadProducts } from './../redux/actions/actions';
 
 const mapStateToProps = state => ({
-  products: state.products,
-  loading: state.products.loading,
-  error: state.products.error
+  products: state,
 });
 
-
 class ProductList extends Component {
-  componentWillReceiveProps(nextProps) {
-  console.log(this.props);
-  }
+  componentWillReceiveProps(nextProps) {}
   componentDidMount() {
     this.props.dispatch(loadProducts());
   }
@@ -21,38 +16,46 @@ class ProductList extends Component {
   }
 
   render() {
-  const { error, loading, products=[] } = this.props;
-  if (error) {
+    const {
+      products: {
+        product: { products, error, loading },
+      },
+    } = this.props;
+    if (error) {
       return <div>Error! {error.message}</div>;
     }
 
     if (loading) {
       return <div>Loading...</div>;
     }
-  console.log(this.props);
-    return <div>{products.map(article => (
-      <div className="post-panel">
-        <div className="post-metadata">
-          <img
-            alt=""
-            className="avatar-image"
-            src={article.external_images[0]}
-            height="40"
-            width="40"
-          />
-          <div className="post-info">
-            <div classname="PopoverLink">
-              <span className="popover-link" data-reactroot="">
-                <a href={article.external_url}>
-                  {article.name}
-                </a>
-              </span>
-            </div>
-            <small>{article.description}</small>
-          </div>
+    return (
+      <div>
+        {products.map(
+          product =>
+            product && (
+              <div className="post-panel">
+                <div className="post-metadata">
+                  <img
+                    alt=""
+                    className="avatar-image"
+                    src={product.external_images[0]}
+                    height="200"
+                    width="400"
+                  />
+                  <div className="post-info">
+                    <div classname="PopoverLink">
+                      <span className="popover-link" data-reactroot="">
+                        <a href={product.external_url}>{product.name}</a>
+                      </span>
+                    </div>
+                    <small>{product.description}</small>
+                  </div>
+                </div>
+              </div>
+            )
+        )}
       </div>
-    </div>)
-  )}</div>;
+    );
   }
 }
 export default connect(mapStateToProps)(ProductList);

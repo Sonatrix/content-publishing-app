@@ -23,7 +23,6 @@ export function loadProducts() {
       .get(`${url}products`)
       .then(res => {
         const products = res.data;
-        console.log(products, 'data1');
         dispatch({ type: 'LOAD_PRODUCTS', products });
       })
       .catch(err => {

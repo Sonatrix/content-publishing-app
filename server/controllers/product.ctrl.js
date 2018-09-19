@@ -8,7 +8,7 @@ module.exports = {
       .catch(next);
   },
   getProduct: (req, res, next) => {
-    Product.find({_id: req.params.id})
+    Product.find({ _id: req.params.id })
       .then(product => res.json(product))
       .catch(next);
   },

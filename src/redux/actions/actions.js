@@ -106,3 +106,33 @@ export function toggleOpen() {
     dispatch({ type: 'TOGGLE_MODAL', modalMode: true });
   };
 }
+
+//booking actions
+
+export function loadCities() {
+  return dispatch => {
+    axios
+      .get(`${url}cities`)
+      .then(res => {
+        const cities = res.data;
+        dispatch({ type: 'LOAD_CITIES', cities });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+}
+
+export function loadShows(id = 1) {
+  return dispatch => {
+    axios
+      .get(`${url}city/${id}`)
+      .then(res => {
+        const shows = res.data;
+        dispatch({ type: 'LOAD_SHOWS', shows });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+}
